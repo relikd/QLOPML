@@ -38,7 +38,6 @@
 			children = (
 				540A649A22EE78B200470937 /* QLOPML */,
 				540A649922EE78B200470937 /* Products */,
-				540A64A722EE7C9B00470937 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,13 +59,6 @@
 				541EF8B122EEFB2300C415AA /* style.css */,
 			);
 			path = QLOPML;
-			sourceTree = "<group>";
-		};
-		540A64A722EE7C9B00470937 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +204,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -264,6 +257,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
