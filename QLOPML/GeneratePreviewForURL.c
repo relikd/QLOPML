@@ -14,9 +14,8 @@ void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview);
 
 OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options)
 {
-	// qlmanage -r && qlmanage -p test.opml -o tmp/ && edit tmp/test.opml.qlpreview/Preview.html
 	CFBundleRef bundle = QLPreviewRequestGetGeneratorBundle(preview);
-	CFDataRef data = renderOPML(url, bundle);
+	CFDataRef data = generateHTML(url, bundle, false);
 	if (data) {
 		QLPreviewRequestSetDataRepresentation(preview, data, kUTTypeHTML, NULL);
 		CFRelease(data);
