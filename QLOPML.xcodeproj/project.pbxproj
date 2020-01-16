@@ -8,18 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		540A649C22EE78B200470937 /* GenerateThumbnailForURL.c in Sources */ = {isa = PBXBuildFile; fileRef = 540A649B22EE78B200470937 /* GenerateThumbnailForURL.c */; };
-		540A649E22EE78B200470937 /* GeneratePreviewForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 540A649D22EE78B200470937 /* GeneratePreviewForURL.m */; };
+		540A649E22EE78B200470937 /* GeneratePreviewForURL.c in Sources */ = {isa = PBXBuildFile; fileRef = 540A649D22EE78B200470937 /* GeneratePreviewForURL.c */; };
 		540A64A022EE78B200470937 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 540A649F22EE78B200470937 /* main.c */; };
 		541EF8B322EEFBEA00C415AA /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 541EF8B122EEFB2300C415AA /* style.css */; };
+		54BFFC1123D09E7300012FBB /* opml-lib.h in Headers */ = {isa = PBXBuildFile; fileRef = 54BFFC0F23D09E7300012FBB /* opml-lib.h */; };
+		54BFFC1223D09E7300012FBB /* opml-lib.m in Sources */ = {isa = PBXBuildFile; fileRef = 54BFFC1023D09E7300012FBB /* opml-lib.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		540A649822EE78B200470937 /* QLOPML.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QLOPML.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		540A649B22EE78B200470937 /* GenerateThumbnailForURL.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = GenerateThumbnailForURL.c; sourceTree = "<group>"; };
-		540A649D22EE78B200470937 /* GeneratePreviewForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneratePreviewForURL.m; sourceTree = "<group>"; };
+		540A649D22EE78B200470937 /* GeneratePreviewForURL.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = GeneratePreviewForURL.c; sourceTree = "<group>"; };
 		540A649F22EE78B200470937 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		540A64A122EE78B200470937 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		541EF8B122EEFB2300C415AA /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		54BFFC0423D0988A00012FBB /* sample.opml */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.opml; sourceTree = SOURCE_ROOT; };
+		54BFFC0F23D09E7300012FBB /* opml-lib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "opml-lib.h"; sourceTree = "<group>"; };
+		54BFFC1023D09E7300012FBB /* opml-lib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "opml-lib.m"; sourceTree = "<group>"; };
 		54FB05D22305C8F400A088AD /* QLOPML.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QLOPML.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,11 +59,14 @@
 			isa = PBXGroup;
 			children = (
 				54FB05D22305C8F400A088AD /* QLOPML.entitlements */,
+				54BFFC0F23D09E7300012FBB /* opml-lib.h */,
+				54BFFC1023D09E7300012FBB /* opml-lib.m */,
 				540A649B22EE78B200470937 /* GenerateThumbnailForURL.c */,
-				540A649D22EE78B200470937 /* GeneratePreviewForURL.m */,
+				540A649D22EE78B200470937 /* GeneratePreviewForURL.c */,
 				540A649F22EE78B200470937 /* main.c */,
 				540A64A122EE78B200470937 /* Info.plist */,
 				541EF8B122EEFB2300C415AA /* style.css */,
+				54BFFC0423D0988A00012FBB /* sample.opml */,
 			);
 			path = QLOPML;
 			sourceTree = "<group>";
@@ -70,6 +78,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54BFFC1123D09E7300012FBB /* opml-lib.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +159,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				540A649C22EE78B200470937 /* GenerateThumbnailForURL.c in Sources */,
-				540A649E22EE78B200470937 /* GeneratePreviewForURL.m in Sources */,
+				54BFFC1223D09E7300012FBB /* opml-lib.m in Sources */,
+				540A649E22EE78B200470937 /* GeneratePreviewForURL.c in Sources */,
 				540A64A022EE78B200470937 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,7 +291,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = QLOPML/Info.plist;
-				INSTALL_PATH = /Library/QuickLook;
 				PRODUCT_BUNDLE_IDENTIFIER = de.relikd.QLOPML;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = qlgenerator;
@@ -292,7 +301,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = QLOPML/Info.plist;
-				INSTALL_PATH = /Library/QuickLook;
 				PRODUCT_BUNDLE_IDENTIFIER = de.relikd.QLOPML;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = qlgenerator;
