@@ -1,36 +1,8 @@
-#include <CoreFoundation/CoreFoundation.h>
-#include <CoreServices/CoreServices.h>
-#include <QuickLook/QuickLook.h>
-#include <Foundation/Foundation.h>
-#include <AppKit/AppKit.h>
-
-NSData* renderOPML(NSURL* url, CFBundleRef bundle);
-
-OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options);
-void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview);
-
-/* -----------------------------------------------------------------------------
-   Generate a preview for file
-
-   This function's job is to create preview for designated file
-   ----------------------------------------------------------------------------- */
-
-OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options)
-{
-	// qlmanage -r && qlmanage -p test.opml -o tmp/ && edit tmp/test.opml.qlpreview/Preview.html
-	CFBundleRef bundle = QLPreviewRequestGetGeneratorBundle(preview);
-	CFDataRef data = CFBridgingRetain(renderOPML((__bridge NSURL*)url, bundle));
-	if (data) {
-		QLPreviewRequestSetDataRepresentation(preview, data, kUTTypeHTML, NULL);
-	}
-    return noErr;
-}
-
-void CancelPreviewGeneration(void *thisInterface, QLPreviewRequestRef preview)
-{
-    // Implement only if supported
-}
-
+//#import <CoreFoundation/CoreFoundation.h>
+//#import <CoreServices/CoreServices.h>
+//#import <QuickLook/QuickLook.h>
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 //  ---------------------------------------------------------------
 // |
@@ -52,7 +24,7 @@ void attribute(NSXMLElement *parent, NSString *key, NSString *value) {
 NSXMLElement* section(NSString *title, NSString *container, NSXMLElement *parent) {
 	make(@"h3", title, parent);
 	NSXMLElement *div = make(container, nil, parent);
-	attribute(div, @"class", @"first");
+	attribute(div, @"class", @"section");
 	return div;
 }
 
@@ -94,9 +66,9 @@ void appendNode(NSXMLElement *child, NSXMLElement *parent) {
 	}
 }
 
-NSData* renderOPML(NSURL* url, CFBundleRef bundle) {
+CFDataRef renderOPML(CFURLRef url, CFBundleRef bundle) {
 	NSError *err;
-	NSXMLDocument *doc = [[NSXMLDocument alloc] initWithContentsOfURL:url options:0 error:&err];
+	NSXMLDocument *doc = [[NSXMLDocument alloc] initWithContentsOfURL:(__bridge NSURL*)url options:0 error:&err];
 	if (err || !doc) {
 		printf("ERROR: %s\n", err.description.UTF8String);
 		return nil;
@@ -112,16 +84,9 @@ NSData* renderOPML(NSURL* url, CFBundleRef bundle) {
 	
 	NSXMLElement *body = make(@"body", nil, html);
 	
-	NSString *appearance = @"light";
-	if (@available(macOS 10.14, *)) {
-		if ([NSAppearance.currentAppearance.name isEqualToString:NSAppearanceNameDarkAqua])
-			appearance = @"dark";
-	}
-	attribute(body, @"class", appearance);
-	
 	for (NSXMLElement *child in doc.children) {
 		appendNode(child, body);
 	}
 	NSXMLDocument *xml = [NSXMLDocument documentWithRootElement:html];
-	return [xml XMLDataWithOptions:NSXMLNodePrettyPrint | NSXMLNodeCompactEmptyElement];
+	return CFBridgingRetain([xml XMLDataWithOptions:NSXMLNodePrettyPrint | NSXMLNodeCompactEmptyElement]);
 }
